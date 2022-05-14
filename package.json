@@ -1,5 +1,5 @@
 {
-  "name": "version-webpack-plugin",
+  "name": "@zww/version-webpack-plugin",
   "version": "1.0.0",
   "description": "生成版本信息的wepback插件",
   "main": "index.js",
