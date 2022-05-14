@@ -10,25 +10,22 @@ class VersionWebpackPlugin {
         const isProd = compiler.options.mode === 'production' || process.env.NODE_ENV === 'production';
         if (!isProd) return;
 
-        compiler.hooks.afterEmit.tap(this.pluginName, (compilation, callback) => {
-            this.fetchVersionInfo(compilation, callback)
+        compiler.hooks.done.tap(this.pluginName, () => {
+            this.fetchVersionInfo(compiler)
         })
     }
-    async fetchVersionInfo (compilation, callback) {
-        const commit = await this.fetchCommitInfo('git rev-parse --short HEAD')
+    async fetchVersionInfo (compiler) {
+        const commitId = await this.fetchCommitInfo('git rev-parse --short HEAD')
         const branch = await this.fetchCommitInfo('git symbolic-ref --short -q HEAD')
-        const detail = await this.fetchCommitInfo(`git show ${commit} --quiet`)
-        const version = require(path.resolve(compilation.compiler.context, 'package.json')).version
-        const buildTime = this.getTime();
+        const detail = await this.fetchCommitInfo(`git show ${commitId} --quiet`)
+        const version = require(path.resolve(compiler.context, 'package.json')).version
+        const time = this.getTime();
 
-        const result = `version: ${version}
-branch: ${branch}
-commit: ${commit}
-buildTime: ${buildTime}
-                        
-detail: 
+        const result = `Version: ${version}
+Branch: ${branch}
+BuildTime: ${time}
 ${detail}`
-        fs.writeFileSync(path.resolve(compilation.compiler.options.output.path, 'version.txt'), result)
+        fs.writeFileSync(path.resolve(compiler.options.output.path, 'version.txt'), result)
     }
     fetchCommitInfo (command) {
         return new Promise((resolve, reject) => {

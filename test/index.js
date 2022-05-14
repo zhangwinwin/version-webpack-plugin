@@ -9,7 +9,9 @@ const compiler = webpack({
     },
     mode: 'production',
     plugins: [
-        new VersionWebpackPlugin()
+        new VersionWebpackPlugin({
+            mode: 'production'
+        })
     ]
 })
 

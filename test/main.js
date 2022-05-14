@@ -1,3 +1,4 @@
-function test () {
-    console.log('test');
+function versionWebpackPlugin () {
+    console.log('欢迎使用--VersionWebpackPlugin')
 }
+versionWebpackPlugin();
