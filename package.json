@@ -1,5 +1,5 @@
 {
-  "name": "@zww/version-webpack-plugin",
+  "name": "@doublewin/version-webpack-plugin",
   "version": "1.0.0",
   "description": "生成版本信息的wepback插件",
   "main": "index.js",
@@ -11,10 +11,14 @@
     "url": "git+https://github.com/zhangwinwin/version-webpack-plugin.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "zhangwinwin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zhangwinwin/version-webpack-plugin/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "homepage": "https://github.com/zhangwinwin/version-webpack-plugin#readme",
   "devDependencies": {

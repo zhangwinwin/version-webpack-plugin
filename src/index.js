@@ -9,7 +9,7 @@ class VersionWebpackPlugin {
     apply (compiler) {
         const isProd = compiler.options.mode === 'production' || process.env.NODE_ENV === 'production';
         if (!isProd) return;
-
+        
         compiler.hooks.done.tap(this.pluginName, () => {
             this.fetchVersionInfo(compiler)
         })
@@ -19,13 +19,16 @@ class VersionWebpackPlugin {
         const branch = await this.fetchCommitInfo('git symbolic-ref --short -q HEAD')
         const detail = await this.fetchCommitInfo(`git show ${commitId} --quiet`)
         const version = require(path.resolve(compiler.context, 'package.json')).version
-        const time = this.getTime();
+        const d = new Date();
+        d.toLocaleTimeString();
+        const time = d.toLocaleString();
 
         const result = `Version: ${version}
 Branch: ${branch}
 BuildTime: ${time}
 ${detail}`
         fs.writeFileSync(path.resolve(compiler.options.output.path, 'version.txt'), result)
+        console.info('——————构建version.txt完成——————')
     }
     fetchCommitInfo (command) {
         return new Promise((resolve, reject) => {
@@ -37,18 +40,6 @@ ${detail}`
                 }
             })
         })
-    }
-    getTime () {
-        const az = d => d < 10 ? `0${d}` : d;
-        const date = new Date();
-        const y = date.getFullYear();
-        const m = date.getMonth() + 1;
-        const d = date.getDate();
-        const h = date.getHours();
-        const min = date.getMinutes();
-        const s = date.getSeconds();
-
-        return `${y}-${az(m)}-${az(d)} ${az(h)}:${az(min)}:${az(s)}`;
     }
 }
 module.exports = VersionWebpackPlugin;
