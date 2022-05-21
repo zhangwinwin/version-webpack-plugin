@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/zhangwinwin/version-webpack-plugin.git"
   },
-  "keywords": [],
+  "keywords": [
+    "webapck",
+    "plugin"
+  ],
   "author": "zhangwinwin",
   "license": "ISC",
   "bugs": {
