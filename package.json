@@ -1,6 +1,6 @@
 {
   "name": "@doublewin/version-webpack-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "生成版本信息的wepback插件",
   "main": "index.js",
   "scripts": {
