@@ -15,7 +15,7 @@
     "plugin"
   ],
   "author": "zhangwinwin",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/zhangwinwin/version-webpack-plugin/issues"
   },
